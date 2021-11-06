@@ -14,7 +14,8 @@ func init() {
 
 func main() {
 	app := fiber.New()
-	routes.UserRoutes(app)
+	routes.ProductRoutes(app)
+	app.Static("/images", "./images")
 
 	log.Fatal(app.Listen(":8080"))
 }

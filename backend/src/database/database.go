@@ -37,10 +37,11 @@ func Connect() *gorm.DB {
 	sqlDB.SetConnMaxLifetime(time.Second)
 
 	var (
-		user models.User
+		product models.Product
+		photos  models.Photo
 	)
 
-	db.AutoMigrate(&user)
+	db.AutoMigrate(&product, &photos)
 
 	return db
 }
