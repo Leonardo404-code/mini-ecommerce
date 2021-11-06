@@ -2,8 +2,8 @@ package main
 
 import (
 	"log"
-	"product-list/database"
-	"product-list/routes"
+	"product-list/src/database"
+	"product-list/src/routes"
 
 	"github.com/gofiber/fiber/v2"
 )

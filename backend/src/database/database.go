@@ -3,7 +3,7 @@ package database
 import (
 	"log"
 	"os"
-	"product-list/models"
+	"product-list/src/models"
 	"time"
 
 	"github.com/joho/godotenv"
