@@ -2,7 +2,6 @@ package database
 
 import (
 	"log"
-	"os"
 	"product-list/src/models"
 	"time"
 
@@ -21,7 +20,7 @@ func Connect() *gorm.DB {
 	}
 
 	db, err := gorm.Open(postgres.New(postgres.Config{
-		DSN: os.Getenv("DATABASEURL"),
+		DSN: "postgres://postgres:151452@localHost:49153/postgres",
 	}), &gorm.Config{})
 
 	if err != nil {

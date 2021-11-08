@@ -19,11 +19,18 @@ export const AsideBarContainer = styled.aside`
   }
 
   nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: left;
+    align-items: center;
     margin-top: 3rem;
 
     a {
       color: #fff;
       font-size: 1.2rem;
+      width: 5rem;
+      margin-bottom: 1rem;
     }
   }
 `;
