@@ -19,8 +19,8 @@ export const ProductContainer = styled.div`
   }
 
   .no-image {
-    width: 20rem;
-    height: 10rem;
+    width: 100%;
+    height: 15rem;
     display: flex;
     align-items: center;
     justify-content: center;

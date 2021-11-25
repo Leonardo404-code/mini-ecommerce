@@ -34,6 +34,7 @@ func main() {
 	app.Use(corsSettings)
 
 	routes.ProductRoutes(app)
+	routes.PaymentRoutes(app)
 
 	app.Static("/images", "./images")
 

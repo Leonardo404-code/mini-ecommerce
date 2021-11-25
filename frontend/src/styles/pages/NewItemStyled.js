@@ -1,22 +1,11 @@
 import styled from "styled-components";
 
 export const Form = styled.form`
-  .no-image {
-    width: 20rem;
-    height: 10rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #fff;
-    color: #191a21;
-    font-size: 2rem;
-    border-radius: 10px;
-  }
-
   .input-container {
     display: flex;
     justify-content: space-around;
-    align-items: center;
+    align-items: baseline;
+    margin-top: 3rem;
 
     div {
       display: flex;
@@ -53,5 +42,28 @@ export const Form = styled.form`
       font-weight: 400;
       resize: none;
     }
+  }
+
+  .button-container {
+    margin: 2rem 9rem 0 0;
+  }
+`;
+
+export const FormImage = styled.form`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .no-image {
+    width: 20rem;
+    height: 10rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+    color: #191a21;
+    font-size: 2rem;
+    border-radius: 10px;
+    cursor: pointer;
   }
 `;

@@ -5,13 +5,20 @@ import {
   ProductContainer,
 } from "../../styles/pages/HomeStyled";
 import { MdNoPhotography } from "react-icons/md";
+import {} from "react-router-dom";
+import { ProductModal } from "../../components/ProductModal";
+import { FiSearch } from "react-icons/fi";
+import { MdDarkMode, MdAdd } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 export function Home() {
-  const [products, setProduct] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [idProduct, setIdProduct] = useState(null);
+  const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
     (async () => {
-      await fetch("http://localhost:8080/products?page=1", {
+      await fetch("http://localhost:8080/products?page=1&product_name=", {
         method: "GET",
         headers: {
           "Content-type": "application/json",
@@ -21,7 +28,7 @@ export function Home() {
         .then((res) => res.json())
         .then((productsJson) => {
           const { data } = productsJson;
-          setProduct(data);
+          setProducts(data);
         })
         .catch((err) => {
           console.log(err);
@@ -29,12 +36,26 @@ export function Home() {
     })();
   }, []);
 
+  const handleOpenProduct = (id) => {
+    setShowModal(true);
+    setIdProduct(id);
+  };
+
+  const hnadleCloseModal = () => {
+    setShowModal(false);
+    setIdProduct(0);
+  };
+
   return (
     <>
       <Header title="Home" />
+
       <ProductSection>
         {products.map((product) => (
-          <ProductContainer key={String(product.ID)}>
+          <ProductContainer
+            key={String(product.ID)}
+            onClick={() => handleOpenProduct(product.ID)}
+          >
             {product.photo.url === "" ? (
               <div className="no-image">
                 <MdNoPhotography />
@@ -50,6 +71,13 @@ export function Home() {
           </ProductContainer>
         ))}
       </ProductSection>
+      {showModal ? (
+        <ProductModal
+          showModal={showModal}
+          handleCloseModal={hnadleCloseModal}
+          idProduct={idProduct}
+        />
+      ) : null}
     </>
   );
 }

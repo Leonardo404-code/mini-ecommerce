@@ -1,10 +1,12 @@
 package controllers
 
 import (
+	"fmt"
 	"math"
 	"product-list/src/database"
 	"product-list/src/models"
 	"strconv"
+	"strings"
 
 	"github.com/gofiber/fiber/v2"
 )
@@ -31,8 +33,10 @@ func GetProducts(c *fiber.Ctx) error {
 		totalPages = 1
 	}
 
-	if err := database.DBConn.Preload("Photo").Offset((page - 1) * 7).Limit(5).Order("id desc").
-		Find(&product); err.Error != nil {
+	searchName := strings.ToLower(c.Query("product_name"))
+
+	if err := database.DBConn.Preload("Photo").Offset((page-1)*7).Limit(5).Order("id desc").
+		Where("name LIKE ?", fmt.Sprintf("%%%s%%", searchName)).Find(&product); err.Error != nil {
 		c.Status(fiber.StatusInternalServerError)
 		return c.JSON(fiber.Map{
 			"error": "failed to find products",
@@ -69,7 +73,10 @@ func GetProduct(c *fiber.Ctx) error {
 }
 
 func CreateProduct(c *fiber.Ctx) error {
-	var product models.Product
+	var (
+		newProduct models.Product
+		product    models.Product
+	)
 
 	if err := c.BodyParser(&product); err != nil {
 		c.Status(fiber.StatusBadRequest)
@@ -99,7 +106,15 @@ func CreateProduct(c *fiber.Ctx) error {
 		})
 	}
 
-	if err := database.DBConn.Create(&product); err.Error != nil {
+	newProduct = models.Product{
+		Name:        strings.ToLower(product.Name),
+		Description: product.Description,
+		Value:       product.Value,
+		Units:       product.Units,
+		Photo:       product.Photo,
+	}
+
+	if err := database.DBConn.Create(&newProduct); err.Error != nil {
 		c.Status(fiber.StatusInternalServerError)
 		return c.JSON(fiber.Map{
 			"error": "error in create product",
