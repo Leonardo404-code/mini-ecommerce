@@ -21,6 +21,7 @@ export default createGlobalStyle`
     outline: none;
     box-sizing: border-box;
     font-family: 'montserrat', sans-serif;
+    letter-spacing: 5px;
   }
 
   html, body, #root{
