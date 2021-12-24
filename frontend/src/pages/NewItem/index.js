@@ -9,7 +9,7 @@ export function NewItem() {
   const [value, setValue] = useState(0);
   const [units, setUnits] = useState(0);
   const [description, setDescription] = useState("");
-  const [showPhotoForm, setShowPhotoForm] = useState(true);
+  const [showPhotoForm, setShowPhotoForm] = useState(false);
   const inputFile = useRef(null);
 
   const handleAddItem = async (e) => {
@@ -117,6 +117,7 @@ export function NewItem() {
               type="number"
               name="units"
               value={units}
+              min="0"
               onChange={(e) => setUnits(e.target.value)}
               className="input-units"
               placeholder="Unidades disponíveis"

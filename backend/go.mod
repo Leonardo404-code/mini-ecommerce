@@ -7,7 +7,6 @@ require (
 	github.com/google/uuid v1.3.0
 	github.com/joho/godotenv v1.4.0
 	github.com/stripe/stripe-go v70.15.0+incompatible
-	github.com/stripe/stripe-go/v72 v72.74.0
 	gorm.io/driver/postgres v1.2.2
 	gorm.io/gorm v1.22.3
 )
