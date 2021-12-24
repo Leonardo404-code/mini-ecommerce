@@ -70,10 +70,6 @@ github.com/klauspost/compress/zlib
 github.com/stripe/stripe-go
 github.com/stripe/stripe-go/form
 github.com/stripe/stripe-go/paymentintent
-# github.com/stripe/stripe-go/v72 v72.74.0
-## explicit; go 1.13
-github.com/stripe/stripe-go/v72
-github.com/stripe/stripe-go/v72/form
 # github.com/valyala/bytebufferpool v1.0.0
 ## explicit
 github.com/valyala/bytebufferpool

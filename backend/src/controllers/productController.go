@@ -13,7 +13,7 @@ import (
 
 func GetProducts(c *fiber.Ctx) error {
 	var (
-		product    []models.Product
+		products   []models.Product
 		totalPages int64
 	)
 
@@ -27,7 +27,7 @@ func GetProducts(c *fiber.Ctx) error {
 		})
 	}
 
-	totalPages = database.DBConn.Find(&product).RowsAffected
+	totalPages = database.DBConn.Find(&products).RowsAffected
 
 	if totalPages == 0 {
 		totalPages = 1
@@ -36,7 +36,7 @@ func GetProducts(c *fiber.Ctx) error {
 	searchName := strings.ToLower(c.Query("product_name"))
 
 	if err := database.DBConn.Preload("Photo").Offset((page-1)*7).Limit(5).Order("id desc").
-		Where("name LIKE ?", fmt.Sprintf("%%%s%%", searchName)).Find(&product); err.Error != nil {
+		Where("name LIKE ?", fmt.Sprintf("%%%s%%", searchName)).Find(&products); err.Error != nil {
 		c.Status(fiber.StatusInternalServerError)
 		return c.JSON(fiber.Map{
 			"error": "failed to find products",
@@ -44,7 +44,7 @@ func GetProducts(c *fiber.Ctx) error {
 	}
 
 	return c.JSON(fiber.Map{
-		"data":  product,
+		"data":  products,
 		"page":  page,
 		"total": math.Ceil(float64(totalPages) / 10),
 	})

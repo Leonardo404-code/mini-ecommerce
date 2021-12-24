@@ -28,6 +28,10 @@ export const Form = styled.form`
         color: #fff;
         font-weight: 400;
         padding: 0.5rem 0;
+
+        :focus {
+          filter: brightness(200%);
+        }
       }
     }
 
@@ -41,6 +45,9 @@ export const Form = styled.form`
       color: #fff;
       font-weight: 400;
       resize: none;
+      :focus {
+        filter: brightness(200%);
+      }
     }
   }
 
