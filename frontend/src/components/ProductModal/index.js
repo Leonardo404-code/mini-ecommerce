@@ -9,6 +9,7 @@ import { ProductContainer, CloseIcon } from "./styled";
 import { Button } from "../Button";
 import { CartContext } from "../../context/CartContext";
 import { useHistory } from "react-router-dom";
+import { MdNoPhotography } from "react-icons/md";
 
 export function ProductModal({ showModal, handleCloseModal, idProduct }) {
   const [product, setProduct] = useState(undefined);
@@ -46,14 +47,20 @@ export function ProductModal({ showModal, handleCloseModal, idProduct }) {
 
   return (
     <NewModal isOpen={showModal} contentLabel="Show product">
-      <CloseIcon align="right">
+      <CloseIcon>
         <AiOutlineCloseCircle onClick={handleCloseModal} size={40} />
       </CloseIcon>
       {product === undefined ? null : (
         <>
           <ProductContainer>
             <section className="info-top">
-              <img src={product.photo.url} alt="imagem do produto" />
+              {product.photo.url === "" ? (
+                <div className="no-image">
+                  <MdNoPhotography />
+                </div>
+              ) : (
+                <img src={product.photo.url} alt="Imagem do produto" />
+              )}
               <div className="product-info">
                 <h2>{product.name}</h2>
                 <p>R$ {product.value.toFixed(2)}</p>
@@ -81,10 +88,10 @@ export function ProductModal({ showModal, handleCloseModal, idProduct }) {
 
               <div className="actions">
                 <Button type="button" onClick={handleAddToCart}>
-                  <AiOutlineShoppingCart size={35} /> Adicionar ao carrinho
+                  <AiOutlineShoppingCart /> Adicionar ao carrinho
                 </Button>
                 <Button type="button" onClick={handleBuyItem}>
-                  <AiOutlineShopping size={35} />
+                  <AiOutlineShopping />
                   Comprar
                 </Button>
               </div>

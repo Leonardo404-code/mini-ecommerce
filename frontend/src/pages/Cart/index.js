@@ -9,6 +9,7 @@ import { BuyContainer, NoItens } from "../../styles/pages/CartStyled";
 import { MdNoPhotography, MdOutlineRemoveShoppingCart } from "react-icons/md";
 import { Button } from "../../components/Button";
 import { useHistory } from "react-router-dom";
+
 export function Cart() {
   const { cart, total } = useContext(CartContext);
 

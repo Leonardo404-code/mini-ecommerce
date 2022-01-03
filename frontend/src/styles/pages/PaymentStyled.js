@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const PaymentContainer = styled.div`
   form {
     width: 30vw;
-    min-width: 500px;
     align-self: center;
     box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
       0px 2px 5px 0px rgba(50, 50, 93, 0.1),
@@ -89,6 +88,14 @@ export const PaymentContainer = styled.div`
     -webkit-animation: loading 2s infinite ease;
     animation: loading 2s infinite ease;
   }
+
+  @media screen and (max-width: 560px) {
+    width: 100%;
+
+    form {
+      width: 100%;
+    }
+  }
 `;
 
 export const PaymentSection = styled.section`
@@ -97,20 +104,23 @@ export const PaymentSection = styled.section`
   justify-content: space-between;
 
   padding: 2.5rem;
+
+  @media screen and (max-width: 560px) {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
 `;
 
 export const ProductContainer = styled.div`
-  border: 1px solid rgba(214, 218, 222, 20%);
-  border-radius: 10px;
-  margin-bottom: 1rem;
-  padding-right: 2rem;
-  transition-duration: 0.5s;
   display: flex;
   align-items: center;
 
-  :hover {
-    transform: scale(1.1);
-  }
+  border: 1px solid rgba(214, 218, 222, 20%);
+  border-radius: 10px;
+
+  margin-bottom: 1rem;
+  padding-right: 2rem;
 
   img {
     width: 5rem;
@@ -119,5 +129,19 @@ export const ProductContainer = styled.div`
 
   div {
     margin-left: 1rem;
+
+    p {
+      margin-top: 0.5rem;
+    }
+  }
+
+  @media screen and (max-width: 560px) {
+    .product-image {
+      width: 5rem;
+    }
+
+    div {
+      padding: 1rem 0;
+    }
   }
 `;
