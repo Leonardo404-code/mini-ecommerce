@@ -24,19 +24,6 @@ export const ProductContainer = styled.div`
     transform: scale(1.05);
   }
 
-  .no-image {
-    width: 100%;
-    height: 15rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #fff;
-    color: #191a21;
-    font-size: 2rem;
-
-    border-radius: 10px;
-  }
-
   img {
     width: 100%;
     height: 15rem;
@@ -48,6 +35,12 @@ export const ProductContainer = styled.div`
     align-items: flex-start;
     flex-direction: column;
     margin-top: 1rem;
+
+    p {
+      :first-child {
+        text-transform: capitalize;
+      }
+    }
   }
 
   .units {
@@ -71,7 +64,6 @@ export const ProductContainer = styled.div`
       font-size: 0.8rem;
     }
 
-    .no-image,
     img {
       height: 12rem;
     }
@@ -84,5 +76,17 @@ export const ProductContainer = styled.div`
   @media screen and (max-width: 435px) {
     width: 90%;
     margin-right: 0;
+  }
+`;
+
+export const NoProducts = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  svg {
+    font-size: 2rem;
+    margin-bottom: 1rem;
   }
 `;

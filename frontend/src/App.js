@@ -24,7 +24,7 @@ function App() {
                 <Route exact path="/credits" component={Creadits} />
                 <Route exact path="/cart" component={Cart} />
                 <Route path="/new_item/" component={NewItem} />
-                <Route path={"/add_photo"} component={AddPhoto} />
+                <Route path={"/add_photo/:id"} component={AddPhoto} />
                 <Route path="/payment" component={Payment} />
               </Switch>
             </Container>

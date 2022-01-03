@@ -8,11 +8,20 @@
 }
 .modal {
   position: absolute;
-  top: 40px;
-  left: 40px;
-  right: 40px;
-  bottom: 40px;
+  top: 2.5rem;
+  left: 5rem;
+  right: 5rem;
+  bottom: 2.5rem;
   border: none;
   background: var(--background);
   overflow: auto;
+}
+
+@media screen and (max-width: 560px) {
+  .modal {
+    top: 1.5rem;
+    left: 1rem;
+    right: 1rem;
+    bottom: 1.5rem;
+  }
 }

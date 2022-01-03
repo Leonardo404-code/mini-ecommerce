@@ -3,11 +3,12 @@ import { Form } from "../../styles/pages/NewItemStyled";
 import { useState } from "react";
 import { Button } from "../../components/Button";
 import { useHistory } from "react-router-dom";
+import NumberFormat from "react-number-format";
 
 export function NewItem() {
   const [name, setName] = useState("");
   const [value, setValue] = useState(0);
-  const [units, setUnits] = useState(0);
+  const [units, setUnits] = useState(1);
   const [description, setDescription] = useState("");
   const history = useHistory();
 
@@ -58,19 +59,24 @@ export function NewItem() {
               className="input-name"
               placeholder="Nome do produto"
             />
-            <input
-              type="text"
-              name="value"
+            <NumberFormat
+              displayType="input"
+              thousandSeparator
+              decimalSeparator="."
               value={value}
-              onChange={(e) => setValue(e.target.value)}
-              className="input-value"
+              onValueChange={(e) => setValue(e.target.value)}
               placeholder="Valor"
+              className="input-value"
+              // eslint-disable-next-line react/jsx-no-duplicate-props
+              onValueChange={(values) => {
+                setValue(values.value);
+              }}
             />
             <input
               type="number"
               name="units"
               value={units}
-              min="0"
+              min="1"
               onChange={(e) => setUnits(e.target.value)}
               className="input-units"
               placeholder="Unidades disponíveis"

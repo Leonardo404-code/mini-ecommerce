@@ -29,24 +29,11 @@ export const ProductContainer = styled.div`
     border-radius: 10px;
   }
 
-  .no-image {
-    width: 50%;
-    height: 15rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #fff;
-    color: #191a21;
-    font-size: 2rem;
-
-    border-radius: 10px;
-  }
-
   .product-info {
     text-align: right;
 
     h2,
-    span {
+    p {
       margin-bottom: 0.5rem;
     }
 
@@ -126,10 +113,6 @@ export const ProductContainer = styled.div`
       }
     }
 
-    .no-image {
-      width: 100%;
-    }
-
     .product-info-two,
     .product-info {
       margin-top: 1rem;
@@ -137,6 +120,10 @@ export const ProductContainer = styled.div`
       p {
         font-size: 0.8rem;
       }
+    }
+
+    .no-image {
+      height: 12rem;
     }
 
     .actions {
@@ -150,6 +137,10 @@ export const ProductContainer = styled.div`
   }
 
   @media screen and (max-width: 450px) {
+    .no-image {
+      height: 9rem;
+    }
+
     .actions {
       svg {
         font-size: 1.3rem;
@@ -163,10 +154,6 @@ export const ProductContainer = styled.div`
 
   @media screen and (max-width: 400px) {
     img {
-      height: 10rem;
-    }
-
-    .no-image {
       height: 10rem;
     }
 
