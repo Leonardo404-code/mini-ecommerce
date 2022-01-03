@@ -54,23 +54,33 @@ export const Form = styled.form`
   .button-container {
     margin: 2rem 9rem 0 0;
   }
-`;
 
-export const FormImage = styled.form`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @media screen and (max-width: 560px) {
+    .input-container {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
-  .no-image {
-    width: 20rem;
-    height: 10rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #fff;
-    color: #191a21;
-    font-size: 2rem;
-    border-radius: 10px;
-    cursor: pointer;
+      div,
+      textarea {
+        width: 80%;
+      }
+    }
+
+    .button-container {
+      margin: 2rem 1rem 0 0;
+    }
+  }
+
+  @media screen and (max-width: 414px) {
+    .input-container {
+      div {
+        .input-name,
+        .input-value,
+        .input-units {
+          width: 80%;
+        }
+      }
+    }
   }
 `;

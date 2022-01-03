@@ -1,15 +1,22 @@
 import styled from "styled-components";
 
 export const AsideBarContainer = styled.aside`
+  position: fixed;
+  height: 100%;
+  border-right: 1px solid rgba(214, 218, 222, 20%);
+
+  @media screen and (max-width: 560px) {
+    display: none;
+  }
+`;
+
+export const AsideBarNavigation = styled.div`
   margin: 0;
   padding: 2rem 0.5rem 0 1.5rem;
   width: 200px;
-  background-color: transparent;
-  position: fixed;
   height: 100%;
-  overflow: auto;
-
-  border-right: 1px solid rgba(214, 218, 222, 20%);
+  position: relative;
+  transition-duration: 0.5s;
 
   div {
     p {

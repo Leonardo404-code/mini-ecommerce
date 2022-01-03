@@ -15,6 +15,12 @@ export default createGlobalStyle`
   font-style: normal; 
 }
 
+:root{
+  --lineColor: rgba(214, 218, 222, 20%);
+  --textSecondary: #5c5e64;
+  --background: #191a21
+}
+
   *{
     margin: 0;
     padding: 0;
@@ -27,14 +33,32 @@ export default createGlobalStyle`
   html, body, #root{
     height: 100%;
     color: #FFF;
-    background-color: #191a21;
+    background-color: var(--background);
   }
 
   a{
     text-decoration: none;
   }
+
+
+.ReactModal__Overlay {
+    opacity: 0;
+    transition: opacity 100ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open{
+    opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+    opacity: 0;
+}
 `;
 
 export const Container = styled.div`
   margin-left: 15rem;
+
+  @media screen and (max-width: 560px) {
+    margin-left: 0;
+  }
 `;

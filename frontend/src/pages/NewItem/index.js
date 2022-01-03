@@ -1,16 +1,15 @@
 import { Header } from "../../components/Header";
-import { Form, FormImage } from "../../styles/pages/NewItemStyled";
-import { MdNoPhotography } from "react-icons/md";
-import { useState, useRef } from "react";
+import { Form } from "../../styles/pages/NewItemStyled";
+import { useState } from "react";
 import { Button } from "../../components/Button";
+import { useHistory } from "react-router-dom";
 
 export function NewItem() {
   const [name, setName] = useState("");
   const [value, setValue] = useState(0);
   const [units, setUnits] = useState(0);
   const [description, setDescription] = useState("");
-  const [showPhotoForm, setShowPhotoForm] = useState(false);
-  const inputFile = useRef(null);
+  const history = useHistory();
 
   const handleAddItem = async (e) => {
     e.preventDefault();
@@ -37,34 +36,9 @@ export function NewItem() {
           setValue(0);
           setUnits(0);
           setDescription("");
-          setShowPhotoForm(true);
+
+          history.push(`/add_photo/${data.ID}`);
         });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const handleOpenfileManagement = async () => {
-    inputFile.current.click();
-  };
-
-  const handleAddPhoto = async (e) => {
-    e.preventDefault();
-
-    try {
-      const image = e.target.files["0"];
-
-      const formData = new FormData();
-
-      formData.append("photo", image);
-
-      await fetch("http://localhost:8080/upload-photo/4", {
-        method: "POST",
-        mode: "cors",
-        body: formData,
-      })
-        .then((res) => res.json())
-        .then((data) => console.log(data));
     } catch (err) {
       console.log(err);
     }
@@ -73,27 +47,6 @@ export function NewItem() {
   return (
     <>
       <Header title="Novo Item" />
-      {showPhotoForm ? (
-        <FormImage>
-          <div
-            className="no-image"
-            align="middle"
-            onClick={handleOpenfileManagement}
-            onKeyDown={handleOpenfileManagement}
-            role="presentation"
-          >
-            <MdNoPhotography />
-          </div>
-          <input
-            type="file"
-            name="photo"
-            accept=".jpg, .jpeg, .png"
-            ref={inputFile}
-            onChange={handleAddPhoto}
-            style={{ display: "none" }}
-          />
-        </FormImage>
-      ) : null}
       <Form onSubmit={handleAddItem}>
         <div className="input-container">
           <div>

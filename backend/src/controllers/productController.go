@@ -121,7 +121,7 @@ func CreateProduct(c *fiber.Ctx) error {
 		})
 	}
 
-	return c.JSON(product)
+	return c.JSON(newProduct)
 }
 
 func DeleteProduct(c *fiber.Ctx) error {

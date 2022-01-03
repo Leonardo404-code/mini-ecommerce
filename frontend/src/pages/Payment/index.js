@@ -9,6 +9,7 @@ import {
   PaymentSection,
 } from "../../styles/pages/PaymentStyled";
 import { CartContext } from "../../context/CartContext";
+import NoImage from "../../images/no-image.png";
 
 const stripePromise = loadStripe(
   "pk_test_51Jv4QNJ8UqvyLktoQZjZaB4PEy8VVUKnrV8RsT6565NTYdLVtAhzfqJD4mmrFHnyxu1wz65tXVdnPeRrnGqJqsqL00TXC6TMH3"
@@ -55,7 +56,15 @@ export function Payment() {
         <div>
           {cart.map((product) => (
             <ProductContainer key={JSON.stringify(product.ID)}>
-              <img src={product.photo.url} alt={product.name} />
+              {product.photo.url === "" ? (
+                <img src={NoImage} alt="Sem imagem" />
+              ) : (
+                <img
+                  src={product.photo.url}
+                  alt="Imagem do produto"
+                  className="product-image"
+                />
+              )}
               <div>
                 <p>{product.name}</p>
                 <p>R$ {product.value.toFixed(2)}</p>

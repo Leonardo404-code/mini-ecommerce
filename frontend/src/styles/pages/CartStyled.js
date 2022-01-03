@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const BuyContainer = styled.footer`
+export const BuyContainer = styled.div`
   width: 82%;
   display: flex;
   align-items: center;
@@ -23,15 +23,29 @@ export const BuyContainer = styled.footer`
     font-weight: 700;
     padding: 0.7rem;
   }
+
+  @media screen and (max-width: 560px) {
+    width: 100%;
+    justify-content: space-around;
+
+    p,
+    button {
+      font-size: 0.8rem;
+    }
+
+    button {
+      width: 10rem;
+    }
+  }
 `;
 
 export const NoItens = styled.div`
+  width: 100%;
+
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
-  width: 100%;
 
   svg {
     font-size: 3rem;
