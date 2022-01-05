@@ -1,10 +1,11 @@
 import { NewModal } from "../Modal";
-import { useLayoutEffect, useState, useContext } from "react";
+import React, { useLayoutEffect, useState, useContext } from "react";
 import {
   AiOutlineCloseCircle,
   AiOutlineShoppingCart,
   AiOutlineShopping,
 } from "react-icons/ai";
+import { NotificationManager } from "react-notifications";
 import { ProductContainer, CloseIcon } from "./styled";
 import { Button } from "../Button";
 import { CartContext } from "../../context/CartContext";
@@ -39,6 +40,7 @@ export function ProductModal({ showModal, handleCloseModal, idProduct }) {
   }, [idProduct]);
 
   const handleAddToCart = () => {
+    NotificationManager.success("Item adicionado ao carrinho");
     handleAddItem(product, quant);
   };
 

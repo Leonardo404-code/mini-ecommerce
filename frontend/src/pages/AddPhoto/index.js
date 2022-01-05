@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import { Header } from "../../components/Header";
 import { ButtonContainer, FormImage } from "../../styles/pages/PhotoStyled";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { Button } from "../../components/Button";
 
@@ -27,7 +27,6 @@ export function AddPhoto() {
         .then((data) => {
           const { url } = data.photo;
           setPhotoUrl(url);
-          console.log(photoUrl);
         });
     } catch (err) {
       console.log(err);

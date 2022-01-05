@@ -1,3 +1,4 @@
+import React from "react";
 import { CustomButton } from "./styled";
 
 export function Button({ children, onClick, className, type, disabled }) {

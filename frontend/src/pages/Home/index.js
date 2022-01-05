@@ -1,5 +1,5 @@
 import { Header } from "../../components/Header";
-import { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import {
   ProductSection,
   ProductContainer,
@@ -10,13 +10,14 @@ import { ProductModal } from "../../components/ProductModal";
 import { ProductContext } from "../../context/ProductContext";
 import { FaRegSadTear } from "react-icons/fa";
 import NumberFormat from "react-number-format";
+import { Pagination } from "../../components/Pagination";
 
 export function Home() {
   const [idProduct, setIdProduct] = useState(null);
 
   const [showModal, setShowModal] = useState(false);
 
-  const { filterProducts } = useContext(ProductContext);
+  const { filterProducts, pageCount } = useContext(ProductContext);
 
   const handleOpenProduct = (id) => {
     setShowModal(true);
@@ -63,6 +64,8 @@ export function Home() {
           <p>Produto não encontrado</p>
         </NoProducts>
       ) : null}
+
+      <Pagination data={filterProducts} pageLimit={pageCount} dataLimit={10} />
 
       {showModal ? (
         <ProductModal

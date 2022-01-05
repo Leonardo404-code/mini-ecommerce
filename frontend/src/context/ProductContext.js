@@ -1,15 +1,16 @@
-import { useEffect, useState, createContext, useMemo } from "react";
+import React, { useEffect, useState, createContext, useMemo } from "react";
 
 export const ProductContext = createContext([]);
 
 export function ProductProvider({ children }) {
+  const [page, setPage] = useState(1);
+  const [pageCount, setPageCount] = useState(0);
   const [products, setProducts] = useState([]);
-
   const [search, setSearch] = useState("");
 
   useEffect(() => {
     (async () => {
-      await fetch(`http://localhost:8080/products?page=1&product_name=`, {
+      await fetch(`http://localhost:8080/products?page=${page}`, {
         method: "GET",
         headers: {
           "Content-type": "application/json",
@@ -18,14 +19,13 @@ export function ProductProvider({ children }) {
       })
         .then((res) => res.json())
         .then((productsJson) => {
-          const { data } = productsJson;
+          const { data, total } = productsJson;
           setProducts(data);
+          setPageCount(total);
         })
-        .catch((err) => {
-          console.log(err);
-        });
+        .catch((err) => {});
     })();
-  }, []);
+  }, [page]);
 
   const filterProducts = useMemo(() => {
     const lowerSearch = search.toLowerCase();
@@ -37,7 +37,15 @@ export function ProductProvider({ children }) {
 
   return (
     <ProductContext.Provider
-      value={{ products, search, setSearch, filterProducts }}
+      value={{
+        products,
+        search,
+        setSearch,
+        filterProducts,
+        page,
+        setPage,
+        pageCount,
+      }}
     >
       {children}
     </ProductContext.Provider>

@@ -1,3 +1,4 @@
+import React, { useContext, useState } from "react";
 import {
   HeaderElement,
   SeachInput,
@@ -8,7 +9,6 @@ import {
 import { FiSearch } from "react-icons/fi";
 import { MdAdd } from "react-icons/md";
 import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
 import { ProductContext } from "../../context/ProductContext";
 export function Header({ title }) {
   const [showInput, setShowInput] = useState(false);

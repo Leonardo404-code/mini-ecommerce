@@ -127,6 +127,10 @@ export const ProductContainer = styled.div`
     border-radius: 10px 0 0 10px;
   }
 
+  .no-image {
+    height: 5rem;
+  }
+
   div {
     margin-left: 1rem;
 

@@ -3,6 +3,7 @@ import {
   useElements,
   PaymentElement,
 } from "@stripe/react-stripe-js";
+import React from "react";
 
 import { Form } from "./styled";
 import { Button } from "../../components/Button";

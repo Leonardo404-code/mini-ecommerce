@@ -1,16 +1,16 @@
 import { AsideBarContainer, AsideBarNavigation } from "./styled";
 import { Link } from "react-router-dom";
 import { ProductContext } from "../../context/ProductContext";
-import { useContext } from "react";
+import React, { useContext } from "react";
 
 export default function AsideBar() {
-  const { products } = useContext(ProductContext);
+  const { filterProducts } = useContext(ProductContext);
 
   return (
     <AsideBarContainer>
       <AsideBarNavigation>
         <div>
-          <p>{products.length} produtos encontrados</p>
+          <p>{filterProducts.length} produtos encontrados</p>
         </div>
 
         <nav>
