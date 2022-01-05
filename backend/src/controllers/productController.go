@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"fmt"
 	"math"
 	"product-list/src/database"
 	"product-list/src/models"
@@ -33,10 +32,8 @@ func GetProducts(c *fiber.Ctx) error {
 		totalPages = 1
 	}
 
-	searchName := strings.ToLower(c.Query("product_name"))
-
-	if err := database.DBConn.Preload("Photo").Offset((page-1)*7).Limit(5).Order("id desc").
-		Where("name LIKE ?", fmt.Sprintf("%%%s%%", searchName)).Find(&products); err.Error != nil {
+	if err := database.DBConn.Preload("Photo").Offset((page - 1) * 10).Limit(10).Order("id desc").
+		Find(&products); err.Error != nil {
 		c.Status(fiber.StatusInternalServerError)
 		return c.JSON(fiber.Map{
 			"error": "failed to find products",
