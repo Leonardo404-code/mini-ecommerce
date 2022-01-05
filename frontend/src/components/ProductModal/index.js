@@ -9,7 +9,8 @@ import { ProductContainer, CloseIcon } from "./styled";
 import { Button } from "../Button";
 import { CartContext } from "../../context/CartContext";
 import { useHistory } from "react-router-dom";
-import { MdNoPhotography } from "react-icons/md";
+import NoImage from "../../images/no-image.png";
+import NumberFormat from "react-number-format";
 
 export function ProductModal({ showModal, handleCloseModal, idProduct }) {
   const [product, setProduct] = useState(undefined);
@@ -55,9 +56,7 @@ export function ProductModal({ showModal, handleCloseModal, idProduct }) {
           <ProductContainer>
             <section className="info-top">
               {product.photo.url === "" ? (
-                <div className="no-image">
-                  <MdNoPhotography />
-                </div>
+                <img src={NoImage} alt="Sem imagem" className="no-image" />
               ) : (
                 <img src={product.photo.url} alt="Imagem do produto" />
               )}
@@ -71,9 +70,17 @@ export function ProductModal({ showModal, handleCloseModal, idProduct }) {
                     value={quant}
                     type="number"
                     onChange={(e) => setQuant(e.target.value)}
+                    min="1"
                   />{" "}
                 </p>
-                <p>Total: {product.value * quant}</p>
+
+                <NumberFormat
+                  displayType="text"
+                  thousandSeparator
+                  decimalSeparator="."
+                  value={product.value * quant}
+                  prefix="Total: "
+                />
               </div>
             </section>
             <section className="info-down">

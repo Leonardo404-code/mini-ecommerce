@@ -3,10 +3,13 @@ import { useState, useContext } from "react";
 import {
   ProductSection,
   ProductContainer,
+  NoProducts,
 } from "../../styles/pages/HomeStyled";
-import { MdNoPhotography } from "react-icons/md";
+import NoImage from "../../images/no-image.png";
 import { ProductModal } from "../../components/ProductModal";
 import { ProductContext } from "../../context/ProductContext";
+import { FaRegSadTear } from "react-icons/fa";
+import NumberFormat from "react-number-format";
 
 export function Home() {
   const [idProduct, setIdProduct] = useState(null);
@@ -36,20 +39,31 @@ export function Home() {
             onClick={() => handleOpenProduct(product.ID)}
           >
             {product.photo.url === "" ? (
-              <div className="no-image">
-                <MdNoPhotography />
-              </div>
+              <img src={NoImage} alt="Sem imagem" className="no-image" />
             ) : (
               <img src={product.photo.url} alt="Imagem do produto" />
             )}
             <div>
               <p>{product.name}</p>
-              <p>R$ {product.value.toFixed(2)}</p>
+              <NumberFormat
+                displayType="text"
+                thousandSeparator
+                decimalSeparator="."
+                value={product.value.toFixed(2)}
+                prefix="R$ "
+              />
             </div>
-            <p className="units">{product.units} unidades</p>
+            <p className="units">{product.units} Unidades</p>
           </ProductContainer>
         ))}
       </ProductSection>
+      {filterProducts.length < 1 ? (
+        <NoProducts>
+          <FaRegSadTear />
+          <p>Produto não encontrado</p>
+        </NoProducts>
+      ) : null}
+
       {showModal ? (
         <ProductModal
           showModal={showModal}

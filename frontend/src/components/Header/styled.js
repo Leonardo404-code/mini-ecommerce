@@ -30,7 +30,7 @@ export const HeaderElement = styled.header`
     h1 {
       width: 33.3%;
       font-size: 1.5rem;
-      white-space: nowrap;
+      text-align: center;
     }
   }
 `;

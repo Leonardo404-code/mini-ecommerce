@@ -1,15 +1,37 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 import { Header } from "../../components/Header";
-import { FormImage } from "../../styles/pages/PhotoStyled";
-import { MdNoPhotography } from "react-icons/md";
-import { useRef } from "react";
-import { useParams } from "react-router-dom";
+import { ButtonContainer, FormImage } from "../../styles/pages/PhotoStyled";
+import { useRef, useState } from "react";
+import { useParams, useHistory } from "react-router-dom";
+import { Button } from "../../components/Button";
+
+import NoImage from "../../images/no-image.png";
 
 export function AddPhoto() {
   const inputFile = useRef(null);
+  const [photoUrl, setPhotoUrl] = useState("");
   const { id } = useParams();
+  const history = useHistory();
 
   const handleOpenfileManagement = async () => {
     inputFile.current.click();
+  };
+
+  const getProductPhoto = async () => {
+    try {
+      await fetch(`http://localhost:8080/product/${id}`, {
+        method: "GET",
+        mode: "cors",
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          const { url } = data.photo;
+          setPhotoUrl(url);
+          console.log(photoUrl);
+        });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleAddPhoto = async (e) => {
@@ -28,25 +50,34 @@ export function AddPhoto() {
         body: formData,
       })
         .then((res) => res.json())
-        .then((data) => console.log(data));
-    } catch (err) {
-      console.log(err);
-    }
+        .then(() => {
+          getProductPhoto();
+        });
+    } catch (err) {}
+  };
+
+  const handleBackToHome = () => {
+    history.push("/");
   };
 
   return (
     <>
       <Header title={"Adicionar Fotos"} />
       <FormImage>
-        <div
-          className="no-image"
-          align="middle"
-          onClick={handleOpenfileManagement}
-          onKeyDown={handleOpenfileManagement}
-          role="presentation"
-        >
-          <MdNoPhotography />
-        </div>
+        {photoUrl === "" ? (
+          <img
+            src={NoImage}
+            alt="No image"
+            onClick={handleOpenfileManagement}
+          />
+        ) : (
+          <img
+            src={photoUrl}
+            alt="Product image"
+            onClick={handleOpenfileManagement}
+          />
+        )}
+
         <input
           type="file"
           name="photo"
@@ -55,9 +86,12 @@ export function AddPhoto() {
           onChange={handleAddPhoto}
           style={{ display: "none" }}
         />
-
         <p>Clique para adicionar uma imagem no seu produto</p>
       </FormImage>
+
+      <ButtonContainer>
+        <Button onClick={handleBackToHome}>Voltar ao início</Button>
+      </ButtonContainer>
     </>
   );
 }

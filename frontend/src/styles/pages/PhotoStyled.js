@@ -6,20 +6,30 @@ export const FormImage = styled.form`
   justify-content: center;
   flex-direction: column;
 
-  p{
-    margin-top: 1rem
+  p {
+    margin-top: 1rem;
   }
 
-  .no-image {
+  img {
     width: 20rem;
-    height: 10rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #fff;
-    color: #191a21;
-    font-size: 2rem;
     border-radius: 10px;
     cursor: pointer;
   }
+
+  @media screen and (max-width: 560px) {
+    padding: 0 2rem;
+
+    img {
+      width: 20rem;
+    }
+
+    p {
+      font-size: 0.8rem;
+    }
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  text-align: right;
+  padding: 5rem 3rem 0 0;
 `;
