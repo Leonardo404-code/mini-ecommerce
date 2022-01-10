@@ -7,9 +7,6 @@ import (
 )
 
 func ProductRoutes(app *fiber.App) {
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello world")
-	})
 	app.Get("/products", controllers.GetProducts)
 	app.Get("/product/:id", controllers.GetProduct)
 	app.Post("/product/create", controllers.CreateProduct)

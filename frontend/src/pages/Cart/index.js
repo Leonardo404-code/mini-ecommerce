@@ -1,42 +1,54 @@
-import { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Header } from "../../components/Header";
-import { CartContext } from "../../context/CartContext";
 import {
-  ProductContainer,
+  BuyContainer,
+  NoItens,
   ProductSection,
-} from "../../styles/pages/HomeStyled";
-import { BuyContainer, NoItens } from "../../styles/pages/CartStyled";
-import { MdNoPhotography, MdOutlineRemoveShoppingCart } from "react-icons/md";
+  ProductContainer,
+} from "../../styles/pages/CartStyled";
+import { MdOutlineRemoveShoppingCart } from "react-icons/md";
 import { Button } from "../../components/Button";
 import { useHistory } from "react-router-dom";
+import NoImage from "../../images/no-image.png";
+import NumberFormat from "react-number-format";
+import { CartContext } from "../../context/CartContext";
+import { AiOutlineDelete } from "react-icons/ai";
 
 export function Cart() {
-  const { cart, total } = useContext(CartContext);
+  const { cart, total, handleRemoveItem } = useContext(CartContext);
 
   const history = useHistory();
 
   const handleCloseOrder = () => {
-    history.push("/payment");
+    history.push("/warning");
   };
 
   return (
     <>
+      <title>E-commerce||Carrinho</title>
       <Header title="Carrinho" />
       <ProductSection>
         {cart.map((product) => (
           <ProductContainer key={String(product.ID)}>
             {product.photo.url === "" ? (
-              <div className="no-image">
-                <MdNoPhotography />
-              </div>
+              <img src={NoImage} alt="Sem imagem" className="no-image" />
             ) : (
               <img src={product.photo.url} alt="Imagem do produto" />
             )}
             <div>
               <p>{product.name}</p>
-              <p>R$ {product.value.toFixed(2)}</p>
+              <NumberFormat
+                displayType="text"
+                thousandSeparator
+                decimalSeparator="."
+                value={product.value.toFixed(2)}
+                prefix="R$ "
+              />
             </div>
-            <p className="units">Quantidade: {product.quant}</p>
+            <div>
+              <p className="units">Quantidade: {product.quant}</p>
+              <AiOutlineDelete onClick={() => handleRemoveItem(product.ID)} />
+            </div>
           </ProductContainer>
         ))}
         {cart.length < 1 ? (
@@ -47,11 +59,15 @@ export function Cart() {
         ) : null}
       </ProductSection>
       <BuyContainer>
-        <p>Total: R${total}</p>
+        <NumberFormat
+          displayType="text"
+          thousandSeparator
+          decimalSeparator="."
+          value={total.toFixed(2)}
+          prefix="R$ "
+        />
         {cart.length < 1 ? (
-          <Button onClick={handleCloseOrder} disabled="true">
-            Fechar pedido
-          </Button>
+          <Button disabled="true">Fechar pedido</Button>
         ) : (
           <Button onClick={handleCloseOrder}>Fechar pedido</Button>
         )}
@@ -59,5 +75,3 @@ export function Cart() {
     </>
   );
 }
-
-// cart.length < 1 ? true : false

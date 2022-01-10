@@ -2,14 +2,15 @@ import { Header } from "../../components/Header";
 import { CheckoutForm } from "../../components/CheckoutForm";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
-import { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import {
   PaymentContainer,
   ProductContainer,
   PaymentSection,
 } from "../../styles/pages/PaymentStyled";
 import { CartContext } from "../../context/CartContext";
-import NoImage from "../../images/no-image.png";
+import NoImage from "../../images/no-image2.png";
+import NumberFormat from "react-number-format";
 
 const stripePromise = loadStripe(
   "pk_test_51Jv4QNJ8UqvyLktoQZjZaB4PEy8VVUKnrV8RsT6565NTYdLVtAhzfqJD4mmrFHnyxu1wz65tXVdnPeRrnGqJqsqL00TXC6TMH3"
@@ -51,13 +52,14 @@ export function Payment() {
 
   return (
     <>
+      <title>E-commerce||Pagamento</title>
       <Header title="Pagamento" />
       <PaymentSection>
         <div>
           {cart.map((product) => (
             <ProductContainer key={JSON.stringify(product.ID)}>
               {product.photo.url === "" ? (
-                <img src={NoImage} alt="Sem imagem" />
+                <img src={NoImage} alt="Sem imagem" className="no-image" />
               ) : (
                 <img
                   src={product.photo.url}
@@ -67,7 +69,13 @@ export function Payment() {
               )}
               <div>
                 <p>{product.name}</p>
-                <p>R$ {product.value.toFixed(2)}</p>
+                <NumberFormat
+                  displayType="text"
+                  thousandSeparator
+                  decimalSeparator="."
+                  value={product.value.toFixed(2)}
+                  prefix="R$ "
+                />
               </div>
             </ProductContainer>
           ))}

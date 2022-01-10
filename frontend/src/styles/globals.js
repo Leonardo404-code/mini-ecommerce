@@ -58,7 +58,7 @@ export default createGlobalStyle`
 export const Container = styled.div`
   margin-left: 15rem;
 
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 810px) {
     margin-left: 0;
   }
 `;

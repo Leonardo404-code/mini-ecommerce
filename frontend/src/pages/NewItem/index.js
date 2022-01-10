@@ -1,9 +1,10 @@
 import { Header } from "../../components/Header";
 import { Form } from "../../styles/pages/NewItemStyled";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button } from "../../components/Button";
 import { useHistory } from "react-router-dom";
 import NumberFormat from "react-number-format";
+import { NotificationManager } from "react-notifications";
 
 export function NewItem() {
   const [name, setName] = useState("");
@@ -14,6 +15,48 @@ export function NewItem() {
 
   const handleAddItem = async (e) => {
     e.preventDefault();
+
+    if (name === "") {
+      NotificationManager.error("Campo nome não pode estar vazio", "Error");
+      return;
+    }
+
+    if (name.length > 255) {
+      NotificationManager.error(
+        "Campo de nome não pode conter mais que 255 caracteres",
+        "Error"
+      );
+      return;
+    }
+
+    if (value === 0) {
+      NotificationManager.error("valor do produto não pode ser zero", "Error");
+      return;
+    }
+
+    if (units === 0) {
+      NotificationManager.error(
+        "unidades do produto não pode ser zero",
+        "Error"
+      );
+      return;
+    }
+
+    if (description === "") {
+      NotificationManager.error(
+        "Campo de descrição não pode estar vazio",
+        "Error"
+      );
+      return;
+    }
+
+    if (description.length > 255) {
+      NotificationManager.error(
+        "Campo de descrição não pode conter mais que 255 caracteres",
+        "Error"
+      );
+      return;
+    }
 
     const post = {
       name: name,
@@ -47,6 +90,7 @@ export function NewItem() {
 
   return (
     <>
+      <title>E-commerce||Novo item</title>
       <Header title="Novo Item" />
       <Form onSubmit={handleAddItem}>
         <div className="input-container">

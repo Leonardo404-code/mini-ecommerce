@@ -11,12 +11,6 @@ import (
 	"github.com/stripe/stripe-go/paymentintent"
 )
 
-// Base https://api.stripe.com
-
-func SavePayment(c *fiber.Ctx) error {
-	return c.SendString("hi")
-}
-
 func CreatePaymentIntent(c *fiber.Ctx) error {
 	err := godotenv.Load(".env")
 

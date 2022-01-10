@@ -8,5 +8,4 @@ import (
 
 func PaymentRoutes(app *fiber.App) {
 	app.Post("/pay", controllers.CreatePaymentIntent)
-	app.Post("/save", controllers.SavePayment)
 }

@@ -41,7 +41,6 @@ export const ProductContainer = styled.div`
       background-color: transparent;
       color: #fff;
       border: none;
-      width: 10%;
       font-size: 1rem;
     }
   }
