@@ -10,6 +10,7 @@ import {
 } from "../../styles/pages/PaymentStyled";
 import { CartContext } from "../../context/CartContext";
 import NoImage from "../../images/no-image2.png";
+import NumberFormat from "react-number-format";
 
 const stripePromise = loadStripe(
   "pk_test_51Jv4QNJ8UqvyLktoQZjZaB4PEy8VVUKnrV8RsT6565NTYdLVtAhzfqJD4mmrFHnyxu1wz65tXVdnPeRrnGqJqsqL00TXC6TMH3"
@@ -51,6 +52,7 @@ export function Payment() {
 
   return (
     <>
+      <title>E-commerce||Pagamento</title>
       <Header title="Pagamento" />
       <PaymentSection>
         <div>
@@ -67,7 +69,13 @@ export function Payment() {
               )}
               <div>
                 <p>{product.name}</p>
-                <p>R$ {product.value.toFixed(2)}</p>
+                <NumberFormat
+                  displayType="text"
+                  thousandSeparator
+                  decimalSeparator="."
+                  value={product.value.toFixed(2)}
+                  prefix="R$ "
+                />
               </div>
             </ProductContainer>
           ))}

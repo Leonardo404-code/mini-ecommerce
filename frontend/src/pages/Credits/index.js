@@ -12,6 +12,7 @@ import GithubIcon from "../../images/github.png";
 export function Creadits() {
   return (
     <>
+      <title>E-commerce||Créditos</title>
       <Header title="Creditos" />
       <CreditsContainer>
         <img src={ProfileImage} alt="Leonardo" />

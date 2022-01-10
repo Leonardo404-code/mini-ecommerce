@@ -45,6 +45,7 @@ export function ProductModal({ showModal, handleCloseModal, idProduct }) {
   };
 
   const handleBuyItem = () => {
+    handleAddItem(product, quant);
     history.push("/cart");
   };
 
@@ -73,6 +74,7 @@ export function ProductModal({ showModal, handleCloseModal, idProduct }) {
                     type="number"
                     onChange={(e) => setQuant(e.target.value)}
                     min="1"
+                    max={product.units}
                   />{" "}
                 </p>
 

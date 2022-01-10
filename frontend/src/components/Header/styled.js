@@ -26,7 +26,7 @@ export const HeaderElement = styled.header`
     }
   }
 
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 810px) {
     h1 {
       width: 33.3%;
       font-size: 1.5rem;
@@ -52,7 +52,7 @@ export const SeachInput = styled.input`
 export const MenuMobile = styled.div`
   display: none;
 
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 810px) {
     display: block;
     height: 100%;
     width: 33.3%;
@@ -62,7 +62,7 @@ export const MenuMobile = styled.div`
 export const BurgerMenu = styled.div`
   display: none;
 
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 810px) {
     cursor: pointer;
     display: flex;
     justify-content: center;

@@ -12,6 +12,8 @@ import { ProductProvider } from "./context/ProductContext";
 import { Payment } from "./pages/Payment";
 import { AddPhoto } from "./pages/AddPhoto";
 import { NotificationContainer } from "react-notifications";
+import { Warning } from "./pages/Warning";
+import { Thanks } from "./pages/Thanks";
 
 function App() {
   return (
@@ -29,7 +31,9 @@ function App() {
                 <Route exact path="/cart" component={Cart} />
                 <Route path="/new_item/" component={NewItem} />
                 <Route path={"/add_photo/:id"} component={AddPhoto} />
+                <Route path={"/warning"} component={Warning} />
                 <Route path="/payment" component={Payment} />
+                <Route path={"/thanks"} component={Thanks} />
               </Switch>
             </Container>
           </CartProvider>

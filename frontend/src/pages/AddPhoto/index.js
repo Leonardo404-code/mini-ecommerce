@@ -61,7 +61,8 @@ export function AddPhoto() {
 
   return (
     <>
-      <Header title={"Adicionar Fotos"} />
+      <title>E-commerce||Adicionar Foto</title>
+      <Header title={"Adicionar Foto"} />
       <FormImage>
         {photoUrl === "" ? (
           <img

@@ -5,7 +5,7 @@ export const ProductSection = styled.section`
   align-items: center;
   flex-wrap: wrap;
 
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 810px) {
     justify-content: center;
   }
 `;
@@ -34,7 +34,6 @@ export const ProductContainer = styled.div`
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-    margin-top: 1rem;
 
     p {
       :first-child {

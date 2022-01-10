@@ -16,7 +16,7 @@ export default function AsideBar() {
         <nav>
           <Link to="/">Home</Link>
           <Link to="/cart">Carrinho</Link>
-          <Link to="/credits">Creditos</Link>
+          <Link to="/credits">Créditos</Link>
         </nav>
       </AsideBarNavigation>
     </AsideBarContainer>

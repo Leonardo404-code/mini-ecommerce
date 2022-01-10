@@ -90,6 +90,7 @@ export function NewItem() {
 
   return (
     <>
+      <title>E-commerce||Novo item</title>
       <Header title="Novo Item" />
       <Form onSubmit={handleAddItem}>
         <div className="input-container">

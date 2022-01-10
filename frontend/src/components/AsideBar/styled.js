@@ -5,7 +5,7 @@ export const AsideBarContainer = styled.aside`
   height: 100%;
   border-right: 1px solid rgba(214, 218, 222, 20%);
 
-  @media screen and (max-width: 560px) {
+  @media screen and (max-width: 810px) {
     display: none;
   }
 `;

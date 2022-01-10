@@ -1,28 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Header } from "../../components/Header";
-import { CartContext } from "../../context/CartContext";
 import {
-  ProductContainer,
+  BuyContainer,
+  NoItens,
   ProductSection,
-} from "../../styles/pages/HomeStyled";
-import { BuyContainer, NoItens } from "../../styles/pages/CartStyled";
+  ProductContainer,
+} from "../../styles/pages/CartStyled";
 import { MdOutlineRemoveShoppingCart } from "react-icons/md";
 import { Button } from "../../components/Button";
 import { useHistory } from "react-router-dom";
 import NoImage from "../../images/no-image.png";
 import NumberFormat from "react-number-format";
+import { CartContext } from "../../context/CartContext";
+import { AiOutlineDelete } from "react-icons/ai";
 
 export function Cart() {
-  const { cart, total } = useContext(CartContext);
+  const { cart, total, handleRemoveItem } = useContext(CartContext);
 
   const history = useHistory();
 
   const handleCloseOrder = () => {
-    history.push("/payment");
+    history.push("/warning");
   };
 
   return (
     <>
+      <title>E-commerce||Carrinho</title>
       <Header title="Carrinho" />
       <ProductSection>
         {cart.map((product) => (
@@ -42,7 +45,10 @@ export function Cart() {
                 prefix="R$ "
               />
             </div>
-            <p className="units">Quantidade: {product.quant}</p>
+            <div>
+              <p className="units">Quantidade: {product.quant}</p>
+              <AiOutlineDelete onClick={() => handleRemoveItem(product.ID)} />
+            </div>
           </ProductContainer>
         ))}
         {cart.length < 1 ? (
