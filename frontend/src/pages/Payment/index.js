@@ -83,7 +83,7 @@ export function Payment() {
         <PaymentContainer>
           {clientSecret && (
             <Elements options={options} stripe={stripePromise}>
-              <CheckoutForm />
+              <CheckoutForm clientSecret={clientSecret} />
             </Elements>
           )}
         </PaymentContainer>
