@@ -45,6 +45,7 @@ export function ProductProvider({ children }) {
         page,
         setPage,
         pageCount,
+        setProducts,
       }}
     >
       {children}

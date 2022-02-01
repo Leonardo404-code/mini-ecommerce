@@ -8,7 +8,7 @@ import { NotificationManager } from "react-notifications";
 
 export function NewItem() {
   const [name, setName] = useState("");
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(1);
   const [units, setUnits] = useState(1);
   const [description, setDescription] = useState("");
   const history = useHistory();
@@ -81,6 +81,10 @@ export function NewItem() {
           setUnits(0);
           setDescription("");
 
+          NotificationManager.success(
+            "Produto criado com sucesso! Agora adicione uma foto"
+          );
+
           history.push(`/add_photo/${data.ID}`);
         });
     } catch (err) {
@@ -95,14 +99,17 @@ export function NewItem() {
       <Form onSubmit={handleAddItem}>
         <div className="input-container">
           <div>
+            <p>Nome do produto</p>
             <input
               type="text"
               name="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="input-name"
-              placeholder="Nome do produto"
+              placeholder="Ex: Camiseta massa"
             />
+
+            <p>Valor</p>
             <NumberFormat
               displayType="input"
               thousandSeparator
@@ -116,6 +123,8 @@ export function NewItem() {
                 setValue(values.value);
               }}
             />
+
+            <p>Unidades disponíveis</p>
             <input
               type="number"
               name="units"

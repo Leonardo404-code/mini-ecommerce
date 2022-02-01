@@ -11,6 +11,10 @@ export const Form = styled.form`
       display: flex;
       flex-direction: column;
 
+      p {
+        font-size: 0.9rem;
+      }
+
       .input-name {
         width: 20rem;
       }
