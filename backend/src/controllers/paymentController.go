@@ -23,7 +23,7 @@ func CreatePaymentIntent(c *fiber.Ctx) error {
 	var payment models.Payment
 
 	if err := c.BodyParser(&payment); err != nil {
-		c.Status(fiber.StatusInternalServerError)
+		c.Status(fiber.StatusBadRequest)
 		return c.JSON(fiber.Map{
 			"error": "error in body-parser",
 		})

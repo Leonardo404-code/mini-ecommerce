@@ -34,7 +34,7 @@ export function Creadits() {
           className="github"
           href="https://github.com/Leonardo404-code"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
         >
           <img src={GithubIcon} alt="Github" />
           <p>Github</p>
@@ -44,7 +44,7 @@ export function Creadits() {
           className="linkedin"
           href="https://www.linkedin.com/in/leonardo-bispo-006701179/"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
         >
           <img src={LinkedinIcon} alt="Linkedin" />
           <p>Linkedin</p>
@@ -54,7 +54,7 @@ export function Creadits() {
           className="instagram"
           href="https://www.instagram.com/leonardobispo.dev/"
           target="_blank"
-          rel="noreferrer"
+          rel="noopener noreferrer"
         >
           <img src={InstagramIcon} alt="Instagram" />
           <p>Instagram</p>

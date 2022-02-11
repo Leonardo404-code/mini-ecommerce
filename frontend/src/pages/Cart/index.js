@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Header } from "../../components/Header";
 import {
   BuyContainer,
@@ -25,7 +25,7 @@ export function Cart() {
 
   return (
     <>
-      <title>E-commerce||Carrinho</title>
+      <title>E-commerce || Carrinho</title>
       <Header title="Carrinho" />
       <ProductSection>
         {cart.map((product) => (

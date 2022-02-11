@@ -33,7 +33,7 @@ export function CartProvider({ children }) {
   const handleRemoveItem = (productId) => {
     let cartCopy = [...cart];
 
-    cartCopy = cartCopy.filter((cartProduct) => cartProduct.ID != productId);
+    cartCopy = cartCopy.filter((cartProduct) => cartProduct.ID !== productId);
 
     setCart(cartCopy);
 
@@ -53,7 +53,7 @@ export function CartProvider({ children }) {
   };
 
   useEffect(() => {
-    const sumValuesOfCart = () => {
+    (() => {
       const getTotal = cart.map((values) => ({
         value: values.value,
       }));
@@ -69,9 +69,7 @@ export function CartProvider({ children }) {
       localStorage.setItem("total", stringfy);
 
       setTotalConvert(totalPrice * 100);
-    };
-
-    sumValuesOfCart();
+    })();
   }, [cart]);
 
   return (

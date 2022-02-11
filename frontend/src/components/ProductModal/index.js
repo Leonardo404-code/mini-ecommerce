@@ -31,11 +31,30 @@ export function ProductModal({ showModal, handleCloseModal, idProduct }) {
         },
         mode: "cors",
       })
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) {
+            const { status } = res;
+
+            switch (status) {
+              case 404:
+                NotificationManager.error("Produto não encontrado");
+                break;
+              case 500:
+                NotificationManager.error("Error ao encontrar o produto");
+                break;
+              default:
+                NotificationManager.error(
+                  "Error desconhecido, por favor entre em contato ou crie um pull request"
+                );
+                break;
+            }
+          }
+
+          return res.json();
+        })
         .then((data) => {
           setProduct(data);
-        })
-        .catch((err) => console.log(err));
+        });
     })();
   }, [idProduct]);
 
@@ -65,7 +84,15 @@ export function ProductModal({ showModal, handleCloseModal, idProduct }) {
               )}
               <div className="product-info">
                 <h2>{product.name}</h2>
-                <p>R$ {product.value.toFixed(2)}</p>
+
+                <NumberFormat
+                  displayType="text"
+                  thousandSeparator
+                  decimalSeparator="."
+                  value={product.value}
+                  prefix="R$ "
+                />
+
                 <p>Unidades: {product.units}</p>
                 <p>
                   Quant:{" "}

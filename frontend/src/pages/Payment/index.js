@@ -11,6 +11,7 @@ import {
 import { CartContext } from "../../context/CartContext";
 import NoImage from "../../images/no-image2.png";
 import NumberFormat from "react-number-format";
+import NotificationManager from "react-notifications/lib/NotificationManager";
 
 const stripePromise = loadStripe(
   "pk_test_51Jv4QNJ8UqvyLktoQZjZaB4PEy8VVUKnrV8RsT6565NTYdLVtAhzfqJD4mmrFHnyxu1wz65tXVdnPeRrnGqJqsqL00TXC6TMH3"
@@ -33,7 +34,25 @@ export function Payment() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(post),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          const { status } = res;
+
+          if (status !== 400) {
+            NotificationManager.error(
+              "Error desconhecido, por favor entre em contato ou crie um pull request"
+            );
+            return;
+          } else {
+            NotificationManager.error(
+              "Não foi possivel processar seu Checkout de Pagamento, por favor tente novamente"
+            );
+            return;
+          }
+        }
+
+        return res.json();
+      })
       .then((data) => {
         const { client_secret } = data;
 
