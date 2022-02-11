@@ -1,10 +1,11 @@
 import { Header } from "../../components/Header";
 import { Form } from "../../styles/pages/NewItemStyled";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button } from "../../components/Button";
 import { useHistory } from "react-router-dom";
 import NumberFormat from "react-number-format";
 import { NotificationManager } from "react-notifications";
+import { ProductContext } from "../../context/ProductContext";
 
 export function NewItem() {
   const [name, setName] = useState("");
@@ -12,8 +13,9 @@ export function NewItem() {
   const [units, setUnits] = useState(1);
   const [description, setDescription] = useState("");
   const history = useHistory();
+  const { handleAddNewProduct } = useContext(ProductContext);
 
-  const handleAddItem = async (e) => {
+  const handleAddProduct = async (e) => {
     e.preventDefault();
 
     if (name === "") {
@@ -65,38 +67,54 @@ export function NewItem() {
       description: description,
     };
 
-    try {
-      await fetch("http://localhost:8080/product/create", {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        mode: "cors",
-        body: JSON.stringify(post),
+    await fetch("http://localhost:8080/product/create", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      mode: "cors",
+      body: JSON.stringify(post),
+    })
+      .then((res) => {
+        if (!res.ok) {
+          const { status } = res;
+
+          switch (status) {
+            case 400:
+              NotificationManager.error("Falha ao criar seu produto");
+              break;
+            default:
+              NotificationManager.error(
+                "Erro interno do servidor, por favor entrar em contato ou criar um novo pull request"
+              );
+              break;
+          }
+        }
+        return res.json();
       })
-        .then((res) => res.json())
-        .then((data) => {
-          setName("");
-          setValue(0);
-          setUnits(0);
-          setDescription("");
+      .then((data) => {
+        const { ID } = data;
 
-          NotificationManager.success(
-            "Produto criado com sucesso! Agora adicione uma foto"
-          );
+        handleAddNewProduct(data);
 
-          history.push(`/add_photo/${data.ID}`);
-        });
-    } catch (err) {
-      console.log(err);
-    }
+        setName("");
+        setValue(0);
+        setUnits(0);
+        setDescription("");
+
+        NotificationManager.success(
+          "Produto criado com sucesso! Agora adicione uma foto"
+        );
+
+        history.push(`/add_photo/${ID}`);
+      });
   };
 
   return (
     <>
       <title>E-commerce||Novo item</title>
       <Header title="Novo Item" />
-      <Form onSubmit={handleAddItem}>
+      <Form onSubmit={handleAddProduct}>
         <div className="input-container">
           <div>
             <p>Nome do produto</p>

@@ -2,7 +2,7 @@
 import { Header } from "../../components/Header";
 import { ButtonContainer, FormImage } from "../../styles/pages/PhotoStyled";
 import React, { useRef, useState, useContext } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Button } from "../../components/Button";
 import { NotificationManager } from "react-notifications";
 import { ProductContext } from "../../context/ProductContext";
@@ -10,7 +10,7 @@ import { ProductContext } from "../../context/ProductContext";
 import NoImage from "../../images/no-image.png";
 
 export function AddPhoto() {
-  const { products, setProducts } = useContext(ProductContext);
+  const { handleAddNewProduct } = useContext(ProductContext);
 
   const inputFile = useRef(null);
 
@@ -18,29 +18,39 @@ export function AddPhoto() {
 
   const { id } = useParams();
 
-  const history = useHistory();
-
-  const handleOpenfileManagement = async () => {
-    inputFile.current.click();
-  };
-
-  const getProductPhoto = async () => {
+  const handleGetProductPhoto = async () => {
     await fetch(`http://localhost:8080/product/${id}`, {
       method: "GET",
       mode: "cors",
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          const { status } = res;
+
+          if (status !== 500) {
+            NotificationManager.error(
+              "Error desconhecido, por favor entre em contato ou crie um pull request"
+            );
+            return;
+          } else {
+            NotificationManager.error("Error ao processar fotos do produto");
+            return;
+          }
+        }
+
+        return res.json();
+      })
       .then((data) => {
         const { url } = data.photo;
 
+        handleAddNewProduct(data);
+
         setPhotoUrl(url);
-
-        const productsCopy = [...products];
-
-        productsCopy.push(data);
-
-        setProducts(productsCopy);
       });
+  };
+
+  const handleOpenfileManagement = async () => {
+    inputFile.current.click();
   };
 
   const handleAddPhoto = async (e) => {
@@ -57,18 +67,33 @@ export function AddPhoto() {
       mode: "cors",
       body: formData,
     })
-      .then((res) => res.json())
+      .then((res) => {
+        if (!res.ok) {
+          const { status } = res;
+
+          switch (status) {
+            case 406:
+              NotificationManager.error(
+                "Formato inválido! Somente formatos PNG, JPG e JPEG permitidos"
+              );
+              break;
+            default:
+              NotificationManager.error(
+                "Error desconhecido, por favor entre em contato ou crie um pull request"
+              );
+              break;
+          }
+        }
+
+        return res.json();
+      })
       .then(() => {
-        getProductPhoto();
+        handleGetProductPhoto();
 
         NotificationManager.success(
           "Foto adicionada, verifique seu produto na página inicial!"
         );
       });
-  };
-
-  const handleBackToHome = () => {
-    history.push("/");
   };
 
   return (
@@ -102,7 +127,9 @@ export function AddPhoto() {
       </FormImage>
 
       <ButtonContainer>
-        <Button onClick={handleBackToHome}>Voltar ao início</Button>
+        <Link to={"/"}>
+          <Button>Voltar ao início</Button>
+        </Link>
       </ButtonContainer>
     </>
   );

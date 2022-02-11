@@ -6,7 +6,6 @@ import (
 	"product-list/src/models"
 	"time"
 
-	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
@@ -14,12 +13,6 @@ import (
 var DBConn *gorm.DB
 
 func Connect() *gorm.DB {
-	err := godotenv.Load(".env")
-
-	if err != nil {
-		log.Fatalf("Error in dotEnv, %v", err)
-	}
-
 	db, err := gorm.Open(postgres.New(postgres.Config{
 		DSN: os.Getenv("DATABASEURL"),
 	}), &gorm.Config{})

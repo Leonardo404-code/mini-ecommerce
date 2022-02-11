@@ -31,7 +31,7 @@ export function Home() {
 
   return (
     <>
-      <title>E-commerce||Home</title>
+      <title>E-commerce || Home</title>
       <Header title="Home" />
 
       <ProductSection>

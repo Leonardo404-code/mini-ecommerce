@@ -74,7 +74,7 @@ func UploadPhoto(c *fiber.Ctx) error {
 	err = c.SaveFile(file, fmt.Sprintf("./images/%s", image))
 
 	if err != nil {
-		c.Status(fiber.StatusBadRequest)
+		c.Status(fiber.StatusInternalServerError)
 		return c.JSON(fiber.Map{
 			"message": "failed to save file",
 		})

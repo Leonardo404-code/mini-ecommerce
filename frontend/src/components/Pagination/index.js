@@ -1,16 +1,19 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Pagination as PaginationStyled } from "./styled";
 import { ProductContext } from "../../context/ProductContext";
 
 export function Pagination({ data, pageLimit, dataLimit }) {
   const { page, setPage } = useContext(ProductContext);
+  const [currentPage, setCurrentPage] = useState(page);
 
   function goToNextPage() {
     setPage((page) => page + 1);
+    setCurrentPage(page);
   }
 
   function goToPreviousPage() {
     setPage((page) => page - 1);
+    setCurrentPage(page);
   }
 
   function changePage(event) {
@@ -45,7 +48,7 @@ export function Pagination({ data, pageLimit, dataLimit }) {
 
         <button
           onClick={goToNextPage}
-          className={`next ${page === page ? "disabled" : ""}`}
+          className={`next ${page === currentPage ? "disabled" : ""}`}
         >
           Next
         </button>

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, createContext, useMemo } from "react";
+import { NotificationManager } from "react-notifications";
 
 export const ProductContext = createContext([]);
 
@@ -17,13 +18,28 @@ export function ProductProvider({ children }) {
         },
         mode: "cors",
       })
-        .then((res) => res.json())
+        .then((res) => {
+          if (!res.ok) {
+            const { status } = res;
+
+            if (status !== 500) {
+              NotificationManager.error(
+                "Error desconhecido, por favor entre em contato ou crie um pull request"
+              );
+              return;
+            } else {
+              NotificationManager.error("Error ao processar os produtos");
+              return;
+            }
+          }
+
+          return res.json();
+        })
         .then((productsJson) => {
           const { data, total } = productsJson;
           setProducts(data);
           setPageCount(total);
-        })
-        .catch((err) => {});
+        });
     })();
   }, [page]);
 
@@ -34,6 +50,24 @@ export function ProductProvider({ children }) {
       product.name.toLowerCase().includes(lowerSearch)
     );
   }, [search, products]);
+
+  const handleAddNewProduct = (data) => {
+    let copyProducts = [...products];
+
+    copyProducts.push(data);
+
+    setProducts(copyProducts);
+  };
+
+  const handleRemoveProduct = (id) => {
+    let productsCopy = [...products];
+
+    productsCopy.filter((productList) => productList.ID !== id);
+
+    console.log(productsCopy);
+
+    setProducts(productsCopy);
+  };
 
   return (
     <ProductContext.Provider
@@ -46,6 +80,8 @@ export function ProductProvider({ children }) {
         setPage,
         pageCount,
         setProducts,
+        handleAddNewProduct,
+        handleRemoveProduct,
       }}
     >
       {children}
