@@ -31,6 +31,7 @@ export const ProductContainer = styled.div`
 
   .product-info {
     text-align: right;
+    text-transform: capitalize;
 
     h2,
     p {
@@ -47,6 +48,10 @@ export const ProductContainer = styled.div`
 
   .product-info-two {
     width: 50%;
+
+    border: 1px solid rgba(214, 218, 222, 20%);
+    border-radius: 10px;
+    padding: 1rem;
 
     span {
       margin: 1rem 0;

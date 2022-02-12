@@ -10,7 +10,7 @@ import { ProductContext } from "../../context/ProductContext";
 import NoImage from "../../images/no-image.png";
 
 export function AddPhoto() {
-  const { handleAddNewProduct } = useContext(ProductContext);
+  const { handleAddNewProduct, products } = useContext(ProductContext);
 
   const inputFile = useRef(null);
 
@@ -42,6 +42,8 @@ export function AddPhoto() {
       })
       .then((data) => {
         const { url } = data.photo;
+
+        products.pop();
 
         handleAddNewProduct(data);
 

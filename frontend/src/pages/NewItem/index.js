@@ -112,7 +112,7 @@ export function NewItem() {
 
   return (
     <>
-      <title>E-commerce||Novo item</title>
+      <title>E-commerce || Novo item</title>
       <Header title="Novo Item" />
       <Form onSubmit={handleAddProduct}>
         <div className="input-container">

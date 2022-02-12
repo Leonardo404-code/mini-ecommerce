@@ -10,6 +10,7 @@ import { FiSearch } from "react-icons/fi";
 import { MdAdd } from "react-icons/md";
 import { Link } from "react-router-dom";
 import { ProductContext } from "../../context/ProductContext";
+
 export function Header({ title }) {
   const [showInput, setShowInput] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);

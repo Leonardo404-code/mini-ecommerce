@@ -32,7 +32,7 @@ export default createGlobalStyle`
 
   html, body, #root{
     height: 100%;
-    color: #FFF;
+    color: #fff;
     background-color: var(--background);
   }
 
