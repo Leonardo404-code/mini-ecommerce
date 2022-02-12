@@ -59,16 +59,6 @@ export function ProductProvider({ children }) {
     setProducts(copyProducts);
   };
 
-  const handleRemoveProduct = (id) => {
-    let productsCopy = [...products];
-
-    productsCopy.filter((productList) => productList.ID !== id);
-
-    console.log(productsCopy);
-
-    setProducts(productsCopy);
-  };
-
   return (
     <ProductContext.Provider
       value={{
@@ -81,7 +71,6 @@ export function ProductProvider({ children }) {
         pageCount,
         setProducts,
         handleAddNewProduct,
-        handleRemoveProduct,
       }}
     >
       {children}
