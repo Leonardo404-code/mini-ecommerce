@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const BuyContainer = styled.div`
-  width: 100%;
+  width: 82%;
   display: flex;
   align-items: center;
   justify-content: space-between;

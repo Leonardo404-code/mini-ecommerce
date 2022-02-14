@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { Warning } from "../pages/Warning";
 import { Thanks } from "../pages/Thanks";
 import { Payment } from "../pages/Payment";

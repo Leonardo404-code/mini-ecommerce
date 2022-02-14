@@ -48,11 +48,13 @@ export const ProductContainer = styled.div`
 
   .product-info-two {
     width: 50%;
+    min-height: 15rem;
 
     border: 1px solid rgba(214, 218, 222, 20%);
     border-radius: 10px;
     padding: 1rem;
 
+    margin-top: 2rem;
     span {
       margin: 1rem 0;
     }

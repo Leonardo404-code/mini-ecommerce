@@ -1,22 +1,15 @@
 package controllers
 
 import (
-	"log"
 	"os"
 	"product-list/src/models"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/joho/godotenv"
 	"github.com/stripe/stripe-go"
 	"github.com/stripe/stripe-go/paymentintent"
 )
 
 func CreatePaymentIntent(c *fiber.Ctx) error {
-	err := godotenv.Load(".env")
-
-	if err != nil {
-		log.Fatalf("Error in dotEnv, %v", err)
-	}
 
 	stripe.Key = os.Getenv("STRIPE_TEST")
 
