@@ -1,2 +1,5 @@
 backend/.env.local
+backend/images
+backend/vendor
+
 frontend/.env.local
