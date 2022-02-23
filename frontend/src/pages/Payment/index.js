@@ -13,6 +13,7 @@ import NoImage from "../../images/no-image2.png";
 import NumberFormat from "react-number-format";
 import NotificationManager from "react-notifications/lib/NotificationManager";
 
+// Replace for your key
 const stripePromise = loadStripe(
   "pk_test_51Jv4QNJ8UqvyLktoQZjZaB4PEy8VVUKnrV8RsT6565NTYdLVtAhzfqJD4mmrFHnyxu1wz65tXVdnPeRrnGqJqsqL00TXC6TMH3"
 );
@@ -74,7 +75,7 @@ export function Payment() {
       <title>E-commerce||Pagamento</title>
       <Header title="Pagamento" />
       <PaymentSection>
-        <div>
+        <div className="product-info">
           {cart.map((product) => (
             <ProductContainer key={JSON.stringify(product.ID)}>
               {product.photo.url === "" ? (

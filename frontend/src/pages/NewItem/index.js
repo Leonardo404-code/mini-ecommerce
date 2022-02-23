@@ -52,14 +52,6 @@ export function NewItem() {
       return;
     }
 
-    if (description.length > 255) {
-      NotificationManager.error(
-        "Campo de descrição não pode conter mais que 255 caracteres",
-        "Error"
-      );
-      return;
-    }
-
     const post = {
       name: name,
       value: Number(value),

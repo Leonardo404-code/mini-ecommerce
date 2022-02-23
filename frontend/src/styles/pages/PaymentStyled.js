@@ -105,6 +105,10 @@ export const PaymentSection = styled.section`
 
   padding: 2.5rem;
 
+  .product-info {
+    width: 50%;
+  }
+
   @media screen and (max-width: 560px) {
     flex-direction: column;
     align-items: center;
@@ -120,7 +124,7 @@ export const ProductContainer = styled.div`
   border-radius: 10px;
 
   margin-bottom: 1rem;
-  padding-right: 2rem;
+  padding-right: 0.5rem;
 
   img {
     width: 5rem;
@@ -133,10 +137,6 @@ export const ProductContainer = styled.div`
 
   div {
     margin-left: 1rem;
-
-    p {
-      margin-top: 0.5rem;
-    }
   }
 
   @media screen and (max-width: 560px) {

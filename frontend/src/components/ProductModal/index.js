@@ -76,7 +76,7 @@ export function ProductModal({ showModal, handleCloseModal, idProduct }) {
       {product === undefined ? null : (
         <>
           <ProductContainer>
-            <section className="info-top">
+            <section>
               {product.photo.url === "" ? (
                 <img src={NoImage} alt="Sem imagem" className="no-image" />
               ) : (
@@ -109,12 +109,12 @@ export function ProductModal({ showModal, handleCloseModal, idProduct }) {
                   displayType="text"
                   thousandSeparator
                   decimalSeparator="."
-                  value={product.value * quant}
+                  value={(product.value * quant).toFixed(2)}
                   prefix="Total: "
                 />
               </div>
             </section>
-            <section className="info-down">
+            <section>
               <div className="product-info-two">
                 <p>Descrição</p>
                 {product.description === "" ? (
